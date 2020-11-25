@@ -2,37 +2,37 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from "../views/index.vue"
 Vue.use(VueRouter)
-import page1 from "../components/界面1.vue"
-import page2 from "../components/界面2.vue"
-import page3 from "../components/界面3.vue"
-import page4 from "../components/界面4.vue"
+import JMpage from "../components/JM模型.vue"
+import GOpage from "../components/GO模型.vue"
+import Duanepage from "../components/Duane模型.vue"
+import Schneidewindpage from "../components/Schneidewind.vue"
 const routes = [
   {
     //默认界面，index
     path: '/',
-    name: 'index',
+    name: '软件可靠性',
     component: index,
     children:
     [
       {
-        component: page1,
-        path: "page1",
-        name:"页面1"
+        component: JMpage,
+        path: "/JM",
+        name:"J-M模型"
       },
       {
-        component:page2,
-        path:"page2",
-        name:"页面2"
+        component:GOpage,
+        path:"/GO",
+        name:"G-O模型"
       },
       {
-        component:page3,
-        path:"page3",
-        name:"页面3"
+        component:Duanepage,
+        path:"/Duane",
+        name:"Duane模型"
       },
       {
-        component:page4,
-        path:"page4",
-        name:"页面4"
+        component:Schneidewindpage,
+        path:"/Schneidewind",
+        name:"Schneidewind模型"
       },
     ],
   },
