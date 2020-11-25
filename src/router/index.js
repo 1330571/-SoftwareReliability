@@ -2,10 +2,10 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import index from "../views/index.vue"
 Vue.use(VueRouter)
-import JMpage from "../components/JM模型.vue"
-import GOpage from "../components/GO模型.vue"
-import Duanepage from "../components/Duane模型.vue"
-import Schneidewindpage from "../components/Schneidewind.vue"
+import JMpage from "../views/JM模型.vue"
+import GOpage from "../views/GO模型.vue"
+import Duanepage from "../views/Duane模型.vue"
+import Schneidewindpage from "../views/Schneidewind.vue"
 const routes = [
   {
     //默认界面，index

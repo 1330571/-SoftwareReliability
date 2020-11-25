@@ -1,12 +1,14 @@
 <template>
-    <el-container style="height: 500px; border: 1px solid #eee">
-        <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-container style="height: 900px; border: 1px solid #eee">
+<!--        主界面的左边内容-->
+        <el-aside width="300px" style="background-color: rgb(238, 241, 246)">
             <el-menu
                 :default-active="$route.path"
                 class="el-menu-vertical-demo"
                 background-color="#545c64"
                 text-color="#fff"
                 active-text-color="#ffd04b">
+<!--                以下的循环是根据index.js中routes数组的内容来动态展开的，item1表示routes的元素，it用来遍历item1的孩子数组-->
                 <el-submenu v-for="(item1,idx1) in this.$router.options.routes" :key="idx1" :index="idx1+''">
                     <template slot="title"><i class="el-icon-message"></i>{{item1.name}}</template>
                     <el-menu-item v-for="(it,idx) in item1.children" :key="idx" @click="topath(it.path)" :index="it.path">
@@ -14,7 +16,7 @@
                 </el-submenu>
             </el-menu>
         </el-aside>
-
+<!--主界面右边的内容，变成router-view表示随着鼠标点击来替换-->
         <el-container>
             <el-main>
                 <router-view></router-view>
@@ -37,7 +39,7 @@
 <script>
     export default {
         methods:{
-            topath(path)
+            topath(path)//响应点击事件，传入参数为要跳转的地址
             {
                 if(path!=this.$route.path)//不等于才跳，不然老是警告
                     this.$router.push(path);
