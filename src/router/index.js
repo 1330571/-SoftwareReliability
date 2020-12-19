@@ -6,36 +6,75 @@ import JMpage from "../views/JM模型.vue"
 import GOpage from "../views/GO模型.vue"
 import Duanepage from "../views/Duane模型.vue"
 import Schneidewindpage from "../views/Schneidewind.vue"
+import login from "../views/login.vue"
+import Dataquery from "../views/Dataquery";
+import Dataadd from "../views/Dataadd";
+import Dataupdate from "../views/Dataupdate";
 const routes = [
   {
     //默认界面，index
     path: '/',
-    name: '软件可靠性',
+    name: '可靠性模型',
     component: index,
+    redirect:"/login",
+    isshow:true,
     children:
     [
       {
         component: JMpage,
         path: "/JM",
-        name:"J-M模型"
+        name:"J-M模型",
+        isshow:true
       },
       {
         component:GOpage,
         path:"/GO",
-        name:"G-O模型"
+        name:"G-O模型",
+        isshow:true
       },
-      {
-        component:Duanepage,
-        path:"/Duane",
-        name:"Duane模型"
-      },
+
       {
         component:Schneidewindpage,
         path:"/Schneidewind",
-        name:"Schneidewind模型"
+        name:"Schneidewind模型",
+        isshow:true
       },
     ],
   },
+  {
+    component:login,
+    path:"/login",
+    name:"login",
+    isshow:false,
+  },
+  {
+    component:index,
+    path:"/data",
+    name:"模型数据",
+    isshow:true,
+    children:
+    [
+      {
+        component:Dataquery,
+        path:"/query",
+        name:"数据查询",
+        isshow:true
+      },
+      {
+        component:Dataadd,
+        path:"/add",
+        name:"数据新增",
+        isshow:true
+      },
+      {
+        component:Dataupdate,
+        path:"/update",
+        name:"数据修改",
+        isshow:false
+      }
+    ]
+  }
+
 
 
 ]

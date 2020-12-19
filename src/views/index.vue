@@ -9,9 +9,9 @@
                 text-color="#fff"
                 active-text-color="#ffd04b">
 <!--                以下的循环是根据index.js中routes数组的内容来动态展开的，item1表示routes的元素，it用来遍历item1的孩子数组-->
-                <el-submenu v-for="(item1,idx1) in this.$router.options.routes" :key="idx1" :index="idx1+''">
+                <el-submenu v-for="(item1,idx1) in this.$router.options.routes" :key="idx1" :index="idx1+''" v-if="item1.isshow">
                     <template slot="title"><i class="el-icon-message"></i>{{item1.name}}</template>
-                    <el-menu-item v-for="(it,idx) in item1.children" :key="idx" @click="topath(it.path)" :index="it.path">
+                    <el-menu-item v-for="(it,idx) in item1.children" :key="idx" @click="topath(it.path)" :index="it.path" v-if="it.isshow">
                         {{it.name}}</el-menu-item>
                 </el-submenu>
             </el-menu>

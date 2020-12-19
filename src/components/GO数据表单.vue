@@ -1,23 +1,17 @@
 <template>
     <div>
         <div style="margin: 20px;"></div>
-        <el-form  label-position="left" label-width="80px" :model="Schpara" :rules="rules" ref="Schpara" class="demo-ruleForm">
-            <el-form-item label="epsilonx" prop="epsilonx">
-                <el-input v-model="Schpara.epsilonx" ></el-input>
+        <el-form label-position="left" label-width="120px" :model="GOpara" :rules="rules" ref="form" class="demo-ruleForm">
+            <el-form-item label="样本数据名称" prop="name">
+                <el-input v-model="GOpara.name" ></el-input>
             </el-form-item>
-            <el-form-item label="epsilony" prop="epsilony">
-                <el-input v-model="Schpara.epsilony" ></el-input>
-            </el-form-item>
-            <el-form-item label="xl" prop="xl">
-                <el-input v-model="Schpara.xl" ></el-input>
-            </el-form-item>
-            <el-form-item label="xr" prop="xr">
-                <el-input v-model="Schpara.xr" ></el-input>
+            <el-form-item label="zeta" prop="zeta">
+                <el-input v-model="GOpara.zeta" ></el-input>
             </el-form-item>
             <!--            提交按钮-->
-            <el-button type="primary" @click="formsubmit('Schpara')">提交</el-button>
+            <el-button type="primary" @click="formsubmit('GOpara')">提交</el-button>
             <!--           重置按钮 -->
-            <el-button type="info" @click="resetform('Schpara')">重置</el-button>
+            <el-button type="info" @click="resetform('GOpara')">重置</el-button>
         </el-form>
     </div>
 </template>
@@ -26,49 +20,48 @@
     export default {
         data() {
             return {
-                Schpara: {//这是表单填的数据,就两个
-                    epsilonx: '',//误差x
-                    epsilony: '',//误差y
-                    xl:'',//xl
-                    xr:''//xr
+                GOpara: {//这是表单填的数据,ex和ey以及选择的数据样本名称
+                    name:'测试数据2',
+                    zeta:0.1,
                 },
                 rules://表单校验
                     {
-                        epsilonx:[
-                            {required:true,message:"请输入epsilonx值",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
+                        name:[
+                            {required:true,message:"请输入样本名称",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
                         ],
-                        epsilony:[
-                            {required:true,message:"请输入epsilony值",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
+                        zeta:[
+                            {required:true,message:"请输入zeta值",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
                         ],
-                        xl:[
-                            {required:true,message:"请输入xl值",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
-                        ],
-                        xr:[
-                            {required:true,message:"请输入xr值",trigger:"blur"}//表示要输入东西，提示信息为message,trigger是触发器，blur表示失去焦点
-                        ],
+
                     }
             };
         },
         methods: {
             formsubmit(formName)//提交校验，非空才能提交
             {
-                this.$refs[formName].validate((valid) => {
-                    if (valid) {//弹窗提示
-                        this.$message({
-                            message:"提交成功",
-                            type:"success"
-                        });
-                        //这里有一个小步骤还没写，就是如果成功了，就自动跳转到u图，
-                    } else {//如果有没填的
+                let rthis=this;
+                //console.log("点击");
+                this.$refs.form.validate((valid) => {
+                    if (valid) {
+                        // console.log(this.GOpara);
+                        this.$emit('showGOdata');//转到父组件进行数据处理
                         this.$message(
                             {
-                                message:"提交失败",
+                                showClose: true,
+                                message:"提交成功",
+                                type:"success",
+                            }
+                        )
+                    } else {
+                        this.$message(
+                            {
+                                showClose: true,
+                                message:"请填写数据",
                                 type:"warning",
                             }
                         )
-
                     }
-                });
+                })
             },
             resetform(formName)//重置
             {
